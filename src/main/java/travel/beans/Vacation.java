@@ -1,9 +1,15 @@
 package travel.beans;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,8 +26,10 @@ public class Vacation {
 	@Column(name="CITY")
 	private String city;
 	@Column(name="ACTIVITY")
-	private Activity activity;
+	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
+	private List<Activity> listOfActivity;
 	@Column(name="TRAVELER")
+	@ManyToOne (cascade=CascadeType.PERSIST)
 	private Traveler traveler;
 	/**
 	 * @param country
@@ -30,14 +38,31 @@ public class Vacation {
 	 * @param activity
 	 * @param traveler
 	 */
-	public Vacation(String country, String state, String city, Activity activity, Traveler traveler) {
+	public Vacation(String country, String state, String city, List<Activity> activity, Traveler traveler) {
 		super();
 		this.country = country;
 		this.state = state;
 		this.city = city;
-		this.activity = activity;
+		this.listOfActivity = activity;
 		this.traveler = traveler;
 	}
+	
+	/**
+	 * @param id
+	 * @param country
+	 * @param city
+	 * @param activity
+	 * @param traveler
+	 */
+	public Vacation(int id, String country, String city, List<Activity> activity, Traveler traveler) {
+		super();
+		this.id = id;
+		this.country = country;
+		this.city = city;
+		this.listOfActivity = activity;
+		this.traveler = traveler;
+	}
+
 	/**
 	 * 
 	 */
@@ -93,18 +118,21 @@ public class Vacation {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
 	/**
-	 * @return the activity
+	 * @return the listOfActivity
 	 */
-	public Activity getActivity() {
-		return activity;
+	public List<Activity> getListOfActivity() {
+		return listOfActivity;
 	}
+
 	/**
-	 * @param activity the activity to set
+	 * @param listOfActivity the listOfActivity to set
 	 */
-	public void setActivity(Activity activity) {
-		this.activity = activity;
+	public void setListOfActivity(List<Activity> listOfActivity) {
+		this.listOfActivity = listOfActivity;
 	}
+
 	/**
 	 * @return the traveler
 	 */
@@ -117,11 +145,13 @@ public class Vacation {
 	public void setTraveler(Traveler traveler) {
 		this.traveler = traveler;
 	}
+
 	@Override
 	public String toString() {
-		return "Vacation [id=" + id + ", country=" + country + ", state=" + state + ", city=" + city + ", activity="
-				+ activity + ", traveler=" + traveler + "]";
+		return "Vacation [id=" + id + ", country=" + country + ", state=" + state + ", city=" + city
+				+ ", listOfActivity=" + listOfActivity + ", traveler=" + traveler + "]";
 	}
+	
 	
 
 }
