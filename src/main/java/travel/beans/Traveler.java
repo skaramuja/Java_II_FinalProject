@@ -1,5 +1,6 @@
 package travel.beans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,8 +11,12 @@ import javax.persistence.Table;
 public class Traveler {
 	@Id
 	@GeneratedValue
+	@Column(name="ID")
 	private int id;
-	private String travelersName;
+	@Column(name="FIRSTNAME")
+	private String firstName;
+	@Column(name="LASTNAME")
+	private String lastName;
 	/**
 	 * 
 	 */
@@ -20,11 +25,13 @@ public class Traveler {
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * @param travelersName
+	 * @param firstName
+	 * @param lastName
 	 */
-	public Traveler(String travelersName) {
+	public Traveler(String firstName, String lastName) {
 		super();
-		this.travelersName = travelersName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	/**
 	 * @return the id
@@ -39,21 +46,35 @@ public class Traveler {
 		this.id = id;
 	}
 	/**
-	 * @return the travelersName
+	 * @return the firstName
 	 */
-	public String getTravelersName() {
-		return travelersName;
+	public String getFirstName() {
+		return firstName;
 	}
 	/**
-	 * @param travelersName the travelersName to set
+	 * @param firstName the firstName to set
 	 */
-	public void setTravelersName(String travelersName) {
-		this.travelersName = travelersName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	@Override
 	public String toString() {
-		return "Traveler [id=" + id + ", travelersName=" + travelersName + "]";
+		return "Traveler [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
+	
+	
 	
 	
 }
