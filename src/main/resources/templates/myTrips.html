@@ -18,39 +18,11 @@
 				<!--link to style sheets-->
 				<link href="style.css" rel="stylesheet" type="text/css">
 				
-		<title>Home</title>
+		<title>My Trips</title>
 	</head>
 
 	<style>
-	.main {
-		background-image: url('vacation.jpg');
-		width: 100%;
-		height: 100%;
-	}
 	
-	.travel {
-		padding-top: 10em;
-		text-align: center;
-		padding-bottom: 20em;
-	}
-	
-	h1 {
-		color: #c7f9cc;
-	}
-	
-	p {
-		color: white;
-	}
-	
-	@media only screen and (max-width:500px) {
-		.travel {
-			padding-top: 0em;
-			padding-bottom: 0em;
-		}
-		.main {
-			background-image: url('vacationMobileSize.jpg');
-		}
-	}
 	</style>
 
 	<body>
@@ -75,60 +47,31 @@
 			</nav>
 			<!-- Navigation -->
 	</header>
+
+	<!-- Main -->
 	
-		<!-- Main -->
-		<main class="main">
-				<div class="container">
-					<div class="row travel">
+	<h1>My Trips</h1>
 	
-						<div class="col-sm">
-							<h1>
-								Plan it
-							</h1>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry. Lorem Ipsum has been the industry's
-								standard dummy text ever since the 1500s, when an unknown printer
-								took a galley of type and scrambled it to make a type specimen
-								book. It has survived not only five centuries, but also the leap
-								into electronic typesetting, remaining essentially unchanged. It
-								was popularised..
-							</p>
-						</div>
+	<form>
+		<table>
+			<tr th:each="currentVacations : ${vacation}">
+				<td th:text="${currentVacations.destination}" />
+				<td th:text="${currentVacations.startDate}" />
+				<td th:text="${currentVacations.endDate}" />
+				
+				<td><a th:href="@{/edit/{id}(id=${currentVacations.id})}">Edit</a></td>
+				<td><a th:href="@{/delete/{id}(id=${currentVacations.id})}">Delete</a></td>
+				<td><a th:href="@{/details/{id}(id=${currentVacations.id})}">Details</a></td>
+			</tr>
+						
+		</table>
+		
+		<a class="btn btn-lg btn-primary" href="planYourTrip" role="button">ADD NEW</a></p>
+		
+
+	</form>
 	
-	
-						<div class="col-sm">
-							<h1>
-								Manage it
-							</h1>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry. Lorem Ipsum has been the industry's
-								standard dummy text ever since the 1500s, when an unknown printer
-								took a galley of type and scrambled it to make a type specimen
-								book. It has survived not only five centuries, but also the leap
-								into electronic typesetting, remaining essentially unchanged. It
-								was popularised..
-							</p>
-						</div>
-						<div class="col-sm">
-							<h1>
-								Enjoy it
-							</h1>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry. Lorem Ipsum has been the industry's
-								standard dummy text ever since the 1500s, when an unknown printer
-								took a galley of type and scrambled it to make a type specimen
-								book. It has survived not only five centuries, but also the leap
-								into electronic typesetting, remaining essentially unchanged. It
-								was popularised..
-							</p>
-						</div>
-					</div>
-				</div>
-			</main>	
-		<!-- Main -->	
+	<!-- Main -->	
 			
 		<!-- Footer -->
 		<footer class="text-center text-lg-start">

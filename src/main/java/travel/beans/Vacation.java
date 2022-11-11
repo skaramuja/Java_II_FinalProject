@@ -1,7 +1,6 @@
 package travel.beans;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,10 +13,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 
 @Data
 @NoArgsConstructor
@@ -35,11 +38,13 @@ public class Vacation {
 	@Column(name="DESTINATION")
 	private String destination;
 	
-	@NotBlank
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@NotNull
 	@Column(name="STARTDATE")
 	private LocalDate startDate;
 	
-	@NotBlank
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
+	@NotNull
 	@Column(name="ENDDATE")
 	private LocalDate endDate;
 	

@@ -18,39 +18,11 @@
 				<!--link to style sheets-->
 				<link href="style.css" rel="stylesheet" type="text/css">
 				
-		<title>Home</title>
+		<title>Plan Your Trip</title>
 	</head>
 
 	<style>
-	.main {
-		background-image: url('vacation.jpg');
-		width: 100%;
-		height: 100%;
-	}
 	
-	.travel {
-		padding-top: 10em;
-		text-align: center;
-		padding-bottom: 20em;
-	}
-	
-	h1 {
-		color: #c7f9cc;
-	}
-	
-	p {
-		color: white;
-	}
-	
-	@media only screen and (max-width:500px) {
-		.travel {
-			padding-top: 0em;
-			padding-bottom: 0em;
-		}
-		.main {
-			background-image: url('vacationMobileSize.jpg');
-		}
-	}
 	</style>
 
 	<body>
@@ -75,60 +47,19 @@
 			</nav>
 			<!-- Navigation -->
 	</header>
+
+	<!-- Main -->
 	
-		<!-- Main -->
-		<main class="main">
-				<div class="container">
-					<div class="row travel">
+	<h1>Plan Your Trip</h1>
 	
-						<div class="col-sm">
-							<h1>
-								Plan it
-							</h1>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry. Lorem Ipsum has been the industry's
-								standard dummy text ever since the 1500s, when an unknown printer
-								took a galley of type and scrambled it to make a type specimen
-								book. It has survived not only five centuries, but also the leap
-								into electronic typesetting, remaining essentially unchanged. It
-								was popularised..
-							</p>
-						</div>
+	<form th:object="${newVacation}" th:action="@{/update/{id}(id=${newVacation.id})}" method=POST>
+		Destination: <input name="destination" size="20" th:field="*{destination}"> <br />
+		Departure: <input name="startDate" type="date" th:field="*{startDate}"><br />
+		Return: <input name="endDate" type="date" th:field="*{endDate}"><br />
+		<input name="submit" type="submit" value="submit" />
+	</form>
 	
-	
-						<div class="col-sm">
-							<h1>
-								Manage it
-							</h1>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry. Lorem Ipsum has been the industry's
-								standard dummy text ever since the 1500s, when an unknown printer
-								took a galley of type and scrambled it to make a type specimen
-								book. It has survived not only five centuries, but also the leap
-								into electronic typesetting, remaining essentially unchanged. It
-								was popularised..
-							</p>
-						</div>
-						<div class="col-sm">
-							<h1>
-								Enjoy it
-							</h1>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry. Lorem Ipsum has been the industry's
-								standard dummy text ever since the 1500s, when an unknown printer
-								took a galley of type and scrambled it to make a type specimen
-								book. It has survived not only five centuries, but also the leap
-								into electronic typesetting, remaining essentially unchanged. It
-								was popularised..
-							</p>
-						</div>
-					</div>
-				</div>
-			</main>	
-		<!-- Main -->	
+	<!-- Main -->	
 			
 		<!-- Footer -->
 		<footer class="text-center text-lg-start">
