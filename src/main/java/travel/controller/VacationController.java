@@ -64,10 +64,10 @@ public class VacationController {
 	 * @return planYourTrip page
 	 */
 	@GetMapping("/edit/{id}")
-	public String showUpdateVacation(@PathVariable("id") long id, Model model) {
+	public RedirectView showUpdateVacation(@PathVariable("id") int id, Model model) {
 		Vacation vacation = repo.findById(id).orElse(null);
 		model.addAttribute("newVacation", vacation);
-		return "planYourTrip";
+		return new RedirectView("../myTrips");
 	}
 
 	/**
@@ -89,10 +89,10 @@ public class VacationController {
 	 * @return viewAllVacations(model)
 	 */
 	@GetMapping("/delete/{id}")
-	public String deleteVacation(@PathVariable("id") long id, Model model) {
+	public RedirectView deleteVacation(@PathVariable("id") int id, Model model) {
 		Vacation vacation = repo.findById(id).orElse(null);
 		repo.delete(vacation);
-		return viewAllVacations(model);
+		return new RedirectView("../myTrips");
 
 	}
 	

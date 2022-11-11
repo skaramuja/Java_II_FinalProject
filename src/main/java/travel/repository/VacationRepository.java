@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import travel.beans.Vacation;
 
 @Repository
-public interface VacationRepository extends JpaRepository<Vacation, Long> {
+public interface VacationRepository extends JpaRepository<Vacation, Integer> {
 
 }
