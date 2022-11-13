@@ -1,5 +1,6 @@
 package travel.beans;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,150 +9,115 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Value;
+
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name="vacation")
 public class Vacation {
 	@Id
 	@GeneratedValue
+	
 	@Column(name="ID")
 	private int id;
-	@Column(name="COUNTRY")
-	private String country;
-	@Column(name="STATE")
-	private String state;
-	@Column(name="CITY")
-	private String city;
-	@Column(name="ACTIVITY")
+	
+	@Size(min = 3, max = 50)
+	@NotBlank
+	@Column(name="DESTINATION")
+	private String destination;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@NotNull
+	@Column(name="STARTDATE")
+	private LocalDate startDate;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
+	@NotNull
+	@Column(name="ENDDATE")
+	private LocalDate endDate;
+	
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
-	private List<Activity> listOfActivity;
-	@Column(name="TRAVELER")
-	@ManyToOne (cascade=CascadeType.PERSIST)
-	private Traveler traveler;
-	/**
-	 * @param country
-	 * @param state
-	 * @param city
-	 * @param activity
-	 * @param traveler
-	 */
-	public Vacation(String country, String state, String city, List<Activity> activity, Traveler traveler) {
-		super();
-		this.country = country;
-		this.state = state;
-		this.city = city;
-		this.listOfActivity = activity;
-		this.traveler = traveler;
-	}
+	@Column(name="ACTIVITIES")
+	private List<Activity> activities;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@Column(name="TRAVELERS")
+	private List<Traveler> travellers;
+
 	/**
+	 * Constructor that takes id, destination, startDate, endDate, activities, and travellers as parameters
 	 * @param id
-	 * @param country
-	 * @param city
-	 * @param activity
-	 * @param traveler
+	 * @param destination
+	 * @param startDate
+	 * @param endDate
+	 * @param activities
+	 * @param travellers
 	 */
-	public Vacation(int id, String country, String city, List<Activity> activity, Traveler traveler) {
-		super();
-		this.id = id;
-		this.country = country;
-		this.city = city;
-		this.listOfActivity = activity;
-		this.traveler = traveler;
-	}
-
-	/**
-	 * 
-	 */
-	public Vacation() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	/**
-	 * @return the country
-	 */
-	public String getCountry() {
-		return country;
-	}
-	/**
-	 * @param country the country to set
-	 */
-	public void setCountry(String country) {
-		this.country = country;
-	}
-	/**
-	 * @return the state
-	 */
-	public String getState() {
-		return state;
-	}
-	/**
-	 * @param state the state to set
-	 */
-	public void setState(String state) {
-		this.state = state;
-	}
-	/**
-	 * @return the city
-	 */
-	public String getCity() {
-		return city;
-	}
-	/**
-	 * @param city the city to set
-	 */
-	public void setCity(String city) {
-		this.city = city;
+	public Vacation(int id, String destination, LocalDate startDate, LocalDate endDate,
+			List<Activity> activities, List<Traveler> travellers) {
+		setId(id);
+		setDestination(destination);
+		setStartDate(startDate);
+		setEndDate(endDate);
+		setActivities(activities);
+		setTravellers(travellers);
 	}
 	
 	/**
-	 * @return the listOfActivity
+	 * Constructor that takes destination, startDate, endDate, activities, and travellers as parameters
+	 * @param destination
+	 * @param startDate
+	 * @param endDate
+	 * @param activities
+	 * @param travellers
 	 */
-	public List<Activity> getListOfActivity() {
-		return listOfActivity;
-	}
-
-	/**
-	 * @param listOfActivity the listOfActivity to set
-	 */
-	public void setListOfActivity(List<Activity> listOfActivity) {
-		this.listOfActivity = listOfActivity;
-	}
-
-	/**
-	 * @return the traveler
-	 */
-	public Traveler getTraveler() {
-		return traveler;
-	}
-	/**
-	 * @param traveler the traveler to set
-	 */
-	public void setTraveler(Traveler traveler) {
-		this.traveler = traveler;
-	}
-
-	@Override
-	public String toString() {
-		return "Vacation [id=" + id + ", country=" + country + ", state=" + state + ", city=" + city
-				+ ", listOfActivity=" + listOfActivity + ", traveler=" + traveler + "]";
+	public Vacation(String destination, LocalDate startDate, LocalDate endDate,
+			List<Activity> activities, List<Traveler> travellers) {
+		setDestination(destination);
+		setStartDate(startDate);
+		setEndDate(endDate);
+		setActivities(activities);
+		setTravellers(travellers);
 	}
 	
+	/**
+	 * Constructor that takes destination, startDate, endDate, and travellers as parameters
+	 * @param destination
+	 * @param startDate
+	 * @param endDate
+	 * @param travellers
+	 */
+	public Vacation(String destination, LocalDate startDate, LocalDate endDate,
+			List<Traveler> travellers) {
+		setDestination(destination);
+		setStartDate(startDate);
+		setEndDate(endDate);
+		setActivities(activities);
+		setTravellers(travellers);
+	}
 	
-
+	/**
+	 * Constructor that takes destination, startDate, and endDate as parameters
+	 * @param destination
+	 * @param startDate
+	 * @param endDate
+	 */
+	public Vacation(String destination, LocalDate startDate, LocalDate endDate) {
+		setDestination(destination);
+		setStartDate(startDate);
+		setEndDate(endDate);
+		setActivities(activities);
+	}
 }

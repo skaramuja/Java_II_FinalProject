@@ -1,0 +1,68 @@
+@charset "ISO-8859-1";
+/* CSS Document */
+
+/* Font family */
+	@font-face {
+		font-family: NotoSans;
+		src: url("Noto_Sans/NotoSans-Regular.ttf");
+		}
+
+	* {
+		font-family: NotoSans; 
+		color: #3e4444;
+		}
+
+/* Start Navigation Bar */
+#navbarNavAltMarkup {
+	justify-content: flex-end;
+	padding-right: 11.5em;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+	color: #3e4444;
+}
+
+.navbar .navbar-nav .nav-link {
+	color: 22577a;
+}
+
+.navbar .navbar-nav .nav-link:active {
+	color: 22577a;
+}
+
+.navbar .navbar-brand {
+	color: 22577a;
+	padding-left: 10.5em;
+}
+
+.navbar .navbar-brand:hover {
+	color: #3e4444;
+}
+
+.navbar {
+	background-color: #c7f9cc;
+	padding: 1em;
+}
+
+.fa {
+	font-size: 1.5em;
+	color: #4B2A0B;
+}
+
+/* End Navigation Bar */
+
+/* Start Footer */
+footer {
+	background-color: #c7f9cc;
+	color: 22577a;
+}
+
+footer a {
+	color: #22577a;
+}
+
+footer a:hover {
+	color: #3e4444;
+	text-decoration: none;
+}
+/* End Footer */
