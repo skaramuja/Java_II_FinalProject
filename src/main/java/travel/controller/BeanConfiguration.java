@@ -20,7 +20,7 @@ public class BeanConfiguration {
 	public Vacation vacation() {
 		LocalDate startDate = LocalDate.of(2022, 11, 06);
 		LocalDate endDate = LocalDate.of(2022, 11, 10);
-		Vacation vacation = new Vacation("Des Moines", startDate,endDate);
+		Vacation vacation = new Vacation("Home", "Des Moines", startDate,endDate);
 		return vacation;
 	}
 
