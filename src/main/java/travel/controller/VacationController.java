@@ -1,133 +1,85 @@
 package travel.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import travel.beans.Vacation;
 import travel.repository.VacationRepository;
 
+@RequestMapping("vacations")
 @Controller
 public class VacationController {
 	@Autowired
 	VacationRepository repo;
-	
+
 	/**
-	 * Displays the Results page if vacation exists in the database otherwise displays add page
+	 * Displays all vacations
 	 * @param model
-	 * @return myTrips page
+	 * @return myTrips
 	 */
-	@GetMapping({ "/", "vacations" })
+	@GetMapping("")
 	public String viewAllVacations(Model model) {
-		if (repo.findAll().isEmpty()) {
-			return addNewVacation(model);
-		}
 		model.addAttribute("vacation", repo.findAll());
 		return "myTrips";
 	}
-
+	
 	/**
-	 * Displays the add vacation page
-	 * @param model
-	 * @return planYourTrip page
-	 */
-	@GetMapping("/createVacation")
-	public String addNewVacation(Model model) {
-		Vacation vacation = new Vacation();
-		model.addAttribute("newVacation", vacation);
-		return "planYourTrip";
-	}
-
-	/**
-	 * Saves the new vacation and redirect to the view all
-	 * @param vacation
-	 * @param model
-	 * @return viewAllVacations(model)
-	 */
-	@PostMapping("/createVacation")
-	public String addNewVacation(@ModelAttribute Vacation vacation, Model model) {
-		repo.save(vacation);
-		return viewAllVacations(model);
-	}
-
-	/**
-	 * Displays add/edit page for the vacation matching the id
+	 * Displays a vacation based on its id to edit
 	 * @param id
-	 * @param model
-	 * @return planYourTrip page
-	 */
-	@GetMapping("/edit/{id}")
-	public RedirectView showUpdateVacation(@PathVariable("id") int id, Model model) {
-		Vacation vacation = repo.findById(id).orElse(null);
-		model.addAttribute("newVacation", vacation);
-		return new RedirectView("../myTrips");
-	}
-
-	/**
-	 * Redirects the user to the myTrips page
-	 * @param vacation
-	 * @param model
-	 * @return A redirect view to the myTrips page
-	 */
-	@PostMapping("/update/{id}") 
-	public RedirectView reviseVacation(Vacation vacation, Model model) {
-		repo.save(vacation);
-		return new RedirectView("../myTrips");
-	}
-	
-	/**
-	 * Deletes selected vacation from database matching using id
-	 * @param id
-	 * @param model
-	 * @return viewAllVacations(model)
-	 */
-	@GetMapping("/delete/{id}")
-	public RedirectView deleteVacation(@PathVariable("id") int id, Model model) {
-		Vacation vacation = repo.findById(id).orElse(null);
-		repo.delete(vacation);
-		return new RedirectView("../myTrips");
-
-	}
-	
-	/**
-	 * Displays index page
-	 * @return index
-	 */
-	@RequestMapping("/index")
-	public String index(){
-	    return "index";
-	}
-	
-	/**
-	 * Displays planYourTrip page
 	 * @param model
 	 * @return planYourTrip
 	 */
-	@RequestMapping("/planYourTrip")
-	public String planYourTrip(Model model){
-		model.addAttribute("newVacation", new Vacation());
-	    return "planYourTrip";
+	@GetMapping("/{id}")
+	public String viewVacation(@PathVariable("id") int id, Model model) {
+		Vacation vacation = repo.findById(id).orElse(null);
+		model.addAttribute("newVacation", vacation);
+		return ("planYourTrip");
 	}
 	
 	/**
-	 * Displays myTrips page
+	 * Save a vacation
+	 * @param vacation
+	 * @param model
 	 * @return myTrips
 	 */
-	@RequestMapping("/myTrips")
-	public String myTrips(Model model){
-		if (repo.findAll().isEmpty()) {
-			return addNewVacation(model);
-		}
-		model.addAttribute("vacation", repo.findAll());
-		return "myTrips";
+	@PostMapping("/{id}")
+	public RedirectView saveVacation(Vacation vacation) {
+		repo.save(vacation);
+		return new RedirectView("myTrips");
 	}
-
+	
+	/**
+	 * Delete a vacation
+	 * @param vacation
+	 * @param model
+	 * @return myTrips
+	 */
+	@GetMapping("/delete/{id}")
+	public RedirectView deleteVacation(@PathVariable("id") int id) {
+		Vacation vacation = repo.findById(id).orElse(null);
+		repo.delete(vacation);
+		return new RedirectView("../myTrips");
+	}
+	
+	/**
+	 * Add a new vacations
+	 * @param model
+	 * @return planYourTrip
+	 */
+	@GetMapping("/new")
+	public String newVacation(Model model) {
+		model.addAttribute("newVacation", new Vacation());
+		return ("planYourTrip");
+	}
 
 }
