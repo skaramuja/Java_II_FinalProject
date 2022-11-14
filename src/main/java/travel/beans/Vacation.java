@@ -33,7 +33,11 @@ public class Vacation {
 	@Column(name="ID")
 	private int id;
 	
-	@Size(min = 3, max = 50)
+	@Size(min = 1, max = 50)
+	@Column(name="NAME")
+	private String name;
+	
+	@Size(min = 2, max = 50)
 	@NotBlank
 	@Column(name="DESTINATION")
 	private String destination;
@@ -57,15 +61,16 @@ public class Vacation {
 	private List<Traveler> travellers;
 
 	/**
-	 * Constructor that takes id, destination, startDate, endDate, activities, and travellers as parameters
+	 * Constructor that takes id, name, destination, startDate, endDate, activities, and travellers as parameters
 	 * @param id
+	 * @param name
 	 * @param destination
 	 * @param startDate
 	 * @param endDate
 	 * @param activities
 	 * @param travellers
 	 */
-	public Vacation(int id, String destination, LocalDate startDate, LocalDate endDate,
+	public Vacation(int id, String name, String destination, LocalDate startDate, LocalDate endDate,
 			List<Activity> activities, List<Traveler> travellers) {
 		setId(id);
 		setDestination(destination);
@@ -73,51 +78,58 @@ public class Vacation {
 		setEndDate(endDate);
 		setActivities(activities);
 		setTravellers(travellers);
+		setName(name);
 	}
 	
 	/**
-	 * Constructor that takes destination, startDate, endDate, activities, and travellers as parameters
+	 * Constructor that takes name, destination, startDate, endDate, activities, and travellers as parameters
+	 * @param name
 	 * @param destination
 	 * @param startDate
 	 * @param endDate
 	 * @param activities
 	 * @param travellers
 	 */
-	public Vacation(String destination, LocalDate startDate, LocalDate endDate,
+	public Vacation(String name, String destination, LocalDate startDate, LocalDate endDate,
 			List<Activity> activities, List<Traveler> travellers) {
 		setDestination(destination);
 		setStartDate(startDate);
 		setEndDate(endDate);
 		setActivities(activities);
 		setTravellers(travellers);
+		setName(name);
 	}
 	
 	/**
-	 * Constructor that takes destination, startDate, endDate, and travellers as parameters
+	 * Constructor that takes name, destination, startDate, endDate, and travellers as parameters
+	 * @param name
 	 * @param destination
 	 * @param startDate
 	 * @param endDate
 	 * @param travellers
 	 */
-	public Vacation(String destination, LocalDate startDate, LocalDate endDate,
+	public Vacation(String name, String destination, LocalDate startDate, LocalDate endDate,
 			List<Traveler> travellers) {
 		setDestination(destination);
 		setStartDate(startDate);
 		setEndDate(endDate);
 		setActivities(activities);
 		setTravellers(travellers);
+		setName(name);
 	}
 	
 	/**
-	 * Constructor that takes destination, startDate, and endDate as parameters
+	 * Constructor that takes name, destination, startDate, and endDate as parameters
+	 * @param name
 	 * @param destination
 	 * @param startDate
 	 * @param endDate
 	 */
-	public Vacation(String destination, LocalDate startDate, LocalDate endDate) {
+	public Vacation(String name, String destination, LocalDate startDate, LocalDate endDate) {
 		setDestination(destination);
 		setStartDate(startDate);
 		setEndDate(endDate);
 		setActivities(activities);
+		setName(name);
 	}
 }
