@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import travel.beans.Activity;
 
 @Repository
-public interface ActivityRepository extends JpaRepository<Activity, Long> {
+public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
 }

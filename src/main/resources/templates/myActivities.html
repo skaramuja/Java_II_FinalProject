@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
+<head>
 		<meta charset="ISO-8859-1">
 		<meta charset="UTF-8">
 		<meta name="author" content="Sabina Johnson/Alex Waters">
@@ -17,43 +17,11 @@
 				
 				<!--link to style sheets-->
 				<link rel="stylesheet" th:href="@{/css/style.css}">
-				
-		<title>Plan Your Trip</title>
-
-<script>
-	function checkForm(form) {
-		// validation fails if the input is blank
-		if (form.destination.value == "") {
-			alert("Error: Please eneter a destination");
-			form.street.focus();
-			return false;
-		}
-		if (form.startDate.value == "") {
-			alert("Error: Please eneter a departure date");
-			form.street.focus();
-			return false;
-		}
-
-		if (form.endDate.value == "") {
-			alert("Error: Please eneter a return date");
-			form.street.focus();
-			return false;
-		}
-
-		return true;
-	}
-</script>
-
-
+<title>My Activities</title>
 </head>
-
-	<style>
-	
-	</style>
-
-	<body>
-	<header>
-			<!-- Navigation -->
+<body>
+<header>
+<!-- Navigation -->
 			<nav class="navbar navbar-expand-lg navbar-light">
 			  <a class="navbar-brand" href="/"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#22577a" class="bi bi-bag-fill" viewBox="0 0 16 16">
 	  			<path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
@@ -73,29 +41,17 @@
 			</nav>
 			<!-- Navigation -->
 	</header>
+<form>
+<h1>My Activities</h1>
+<table>
+<tr th:each = "currentActivities : ${activities}">
+	<td th:test = "${currentActivities.name}"/>
+	<td th:test = "${currentActivities.date}"/>
+	<td th:test = "${currentActivities.description}"/>
+</tr>
 
-	<!-- Main -->
-	
-	<h1>Plan Your Trip</h1>
-	
-	<form th:object="${newVacation}" th:action="@{/vacations/{id}(id=${newVacation.id})}" method=POST>
-		Vacation Name: <input name="name" size="20" th:field="*{name}"> <br />
-		Destination: <input name="destination" size="20" th:field="*{destination}"> <br />
-		Departure: <input name="startDate" type="date" th:field="*{startDate}"><br />
-		Return: <input name="endDate" type="date" th:field="*{endDate}"><br />
-		<input name="submit" type="submit" value="submit" />
-	</form>
-	
-	<!-- Main -->	
-			
-		<!-- Footer -->
-		<footer class="text-center text-lg-start">
-			<!-- Copyright -->
-			<div class="text-center p-3">
-				@2020 Copyright: <a href="/"><strong>Triply</strong></a>
-			</div>
-			<!-- Copyright -->
-		</footer>
-		<!-- Footer -->
-	</body>
+</table>
+</form>
+<a href="/myActivities/new">Add new Activity</a>
+</body>
 </html>
