@@ -52,6 +52,48 @@
 
 	<!-- Main -->
 
+	<div class="container">
+		<div class="row form">
+			<div class="col-lg">
+				<h1>Plan Your Trip</h1>
+			</div>
+		</div>
+	</div>
+
+
+	<form th:action="@{/vacations/{id}(id=${newVacation.id})}" th:object="${newVacation}" method="post" class="form">
+		<div class="container">
+			<div class="row form">
+				<div class="col-sm">
+					<div class="form-group">
+						<label for="name">Vacation Name:</label> 
+						<input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Smith's Family Trip 2022">
+						<div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+					</div>
+
+					<div class="form-group">
+						<label for="destination">Destination:</label> 
+						<input class="form-control" type="text" th:field="*{destination}" id="destination" placeholder="(Country, Region, or City)">
+						<div class="alert alert-warning" th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></div>
+					</div>
+
+
+					<div class="form-group">
+						<label for="startDate">Departure:</label> 
+						<input class="form-control" type="date" th:field="*{startDate}" id="startDate">
+						<div class="alert alert-warning" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
+					</div>
+
+					<div class="form-group">
+						<label for="endDate">Return:</label> 
+						<input class="form-control" type="date" th:field="*{endDate}" id="endDate">
+						<div class="alert alert-warning" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
+					</div>
+
+					<input type="submit" class="btn btn-success" value="SUBMIT">
+				</div>
+			</div>
+		</div>
 	</form>
 	
 	<!-- Main -->	
