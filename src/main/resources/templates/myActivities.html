@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
+<head>
 		<meta charset="ISO-8859-1">
 		<meta charset="UTF-8">
 		<meta name="author" content="Sabina Johnson/Alex Waters">
@@ -17,21 +17,11 @@
 				
 				<!--link to style sheets-->
 				<link rel="stylesheet" th:href="@{/css/style.css}">
-				
-		<title>My Trips</title>
-	</head>
-
-	<style>
-	
-	.label {
-	background: #22577a;
-	}
-	
-	</style>
-
-	<body>
-	<header>
-			<!-- Navigation -->
+<title>My Activities</title>
+</head>
+<body>
+<header>
+<!-- Navigation -->
 			<nav class="navbar navbar-expand-lg navbar-light">
 			  <a class="navbar-brand" href="/"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#22577a" class="bi bi-bag-fill" viewBox="0 0 16 16">
 	  			<path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
@@ -51,65 +41,17 @@
 			</nav>
 			<!-- Navigation -->
 	</header>
+<form>
+<h1>My Activities</h1>
+<table>
+<tr th:each = "currentActivities : ${activities}">
+	<td th:test = "${currentActivities.name}"/>
+	<td th:test = "${currentActivities.date}"/>
+	<td th:test = "${currentActivities.description}"/>
+</tr>
 
-	<!-- Main -->
-	<div class="container">
-		<div class="row form">
-			<div class="col-lg">
-				<h1>My Trips</h1>
-			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="row form">
-			<div class="col-lg">
-				<table class="table">
-					<thead class="label">
-						<tr>
-							<th scope="col" style="color: white;">Name</th>
-							<th scope="col" style="color: white;">Destination</th>
-							<th scope="col" style="color: white;">Departure</th>
-							<th scope="col" style="color: white;">Return</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-						<tr th:each="currentVacations : ${vacation}">
-							<td th:text="${currentVacations.name}" />
-							<td th:text="${currentVacations.destination}" />
-							<td th:text="${currentVacations.startDate}" />
-							<td th:text="${currentVacations.endDate}" />
-
-							<td><a
-								th:href="@{/vacations/{id}(id=${currentVacations.id})}">Edit</a></td>
-							<td><a
-								th:href="@{/vacations/delete/{id}(id=${currentVacations.id})}">Delete</a></td>
-							<td><a th:href="@{/details/{id}(id=${currentVacations.id})}">Details</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="row form">
-			<div class="col-lg">
-				<a class="btn btn-success" href="/vacations/new" role="button">ADD VACATION</a>
-			</div>
-		</div>
-	</div>
-	<!-- Main -->	
-			
-		<!-- Footer -->
-		<footer class="text-center text-lg-start">
-			<!-- Copyright -->
-			<div class="text-center p-3">
-				@2022 Copyright: <a href="/"><strong>Triply</strong></a>
-			</div>
-			<!-- Copyright -->
-		</footer>
-		<!-- Footer -->
-	</body>
+</table>
+</form>
+<a href="/myActivities/new">Add new Activity</a>
+</body>
 </html>

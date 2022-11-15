@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +32,8 @@ public class Activity {
 	@Column(name="NAME")
 	private String name;
 	
-	@NotBlank
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@NotNull
 	@Column(name="DATE")
 	private LocalDate date;
 	
