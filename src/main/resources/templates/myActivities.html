@@ -19,6 +19,13 @@
 				<link rel="stylesheet" th:href="@{/css/style.css}">
 <title>My Activities</title>
 </head>
+<style>
+	
+	.label {
+	background: #22577a;
+	}
+	
+	</style>
 <body>
 <header>
 <!-- Navigation -->
@@ -43,15 +50,44 @@
 	</header>
 <form>
 <h1>My Activities</h1>
-<table>
-<tr th:each = "currentActivities : ${activities}">
-	<td th:test = "${currentActivities.name}"/>
-	<td th:test = "${currentActivities.date}"/>
-	<td th:test = "${currentActivities.description}"/>
-</tr>
 
-</table>
+<div class="container">
+		<div class="row form">
+			<div class="col-lg">
+				<table class="table">
+					<thead class="label">
+						<tr>
+							<th scope="col" style="color: white;">Name</th>
+							<th scope="col" style="color: white;">Date</th>
+							<th scope="col" style="color: white;">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						<tr th:each="currentActivities : ${activities}">
+							<td th:text="${currentActivities.name}" />
+							<td th:text="${currentActivities.date}" />
+							<td th:text="${currentActivities.description}" />
+						<td><a
+							th:href="@{/myActivities/{id}(id=${currentActivities.id})}">Edit</a></td>
+						<td><a
+							th:href="@{/myActivities/delete/{id}(id=${currentActivities.id})}">Delete</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row form">
+			<div class="col-lg">
+				<a class="btn btn-success" href="/myActivities/new" role="button">ADD ACTIVITIES</a>
+			</div>
+		</div>
+	</div>
+
 </form>
-<a href="/myActivities/new">Add new Activity</a>
 </body>
 </html>
