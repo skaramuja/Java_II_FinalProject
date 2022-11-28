@@ -33,18 +33,37 @@ public class Traveler {
 	@Column(name="LASTNAME")
 	private String lastName;
 	
+	@Column(name="RELATIONSHIP")
+	private String relationship;
+	
 
 	/**
-	 * Constructor that takes id, firstname, and lastname as parameters
+	 * Constructor that takes id, firstname, lastname, and relationship as parameters
 	 * @param id
 	 * @param firstName
 	 * @param lastName
+	 * @param relationship
 	 */
-	public Traveler(int id, String firstName, String lastName) {
+	public Traveler(int id, String firstName, String lastName, String relationship) {
 		setId(id);
 		setFirstName(firstName);
 		setLastName(lastName);
+		setRelationship(relationship);
 	}
+	
+	/**
+	 * Constructor that takes id, firstname, lastname, and relationship as parameters
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param relationship
+	 */
+	public Traveler(String firstName, String lastName, String relationship) {
+		setFirstName(firstName);
+		setLastName(lastName);
+		setRelationship(relationship);
+	}	
+	
 	
 	/**
 	 * Constructor that takes id, firstname, and lastname as parameters
