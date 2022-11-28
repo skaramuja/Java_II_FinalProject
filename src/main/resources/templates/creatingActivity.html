@@ -47,7 +47,7 @@
 				<div class="col-sm">
 					<div class="form-group">
 						<label for="name">Activity Name:</label> 
-						<input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Swimming">
+						<input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Beach, Museum, Picnic, Mini Golf, etc.">
 						<div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 					</div>
 
