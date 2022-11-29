@@ -1,10 +1,14 @@
 package travel.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import travel.beans.Traveler;
 import travel.beans.Vacation;
 import travel.repository.VacationRepository;
 
@@ -21,7 +25,7 @@ import travel.repository.VacationRepository;
 public class VacationController {
 	@Autowired
 	VacationRepository repo;
-
+	
 
 	/**
 	 * Displays all vacations
@@ -53,7 +57,7 @@ public class VacationController {
 	 * @param model
 	 * @return myTrips
 	 */
-	@PostMapping("/{id}")
+	@PostMapping(value = "/{id}")
 	public String saveVacation(@Valid @ModelAttribute("newVacation") Vacation vacation, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("newVacation", vacation);
@@ -62,6 +66,7 @@ public class VacationController {
 		repo.save(vacation);
 		return "redirect:/vacations";
 	}
+	
 
 	/**
 	 * Delete a vacation

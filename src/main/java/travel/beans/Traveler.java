@@ -2,6 +2,7 @@ package travel.beans;
 
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,14 +15,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name="travelers")
+@Embeddable
 public class Traveler {
-	@Id
-	@GeneratedValue
-	
-	@Column(name="ID")
-	private int id;
 	
 	@Size(min = 3, max = 50)
 	@NotBlank
@@ -45,29 +40,13 @@ public class Traveler {
 	 * @param relationship
 	 */
 	public Traveler(int id, String firstName, String lastName, String relationship) {
-		setId(id);
 		setFirstName(firstName);
 		setLastName(lastName);
 		setRelationship(relationship);
 	}
 	
 	/**
-	 * Constructor that takes id, firstname, lastname, and relationship as parameters
-	 * @param id
-	 * @param firstName
-	 * @param lastName
-	 * @param relationship
-	 */
-	public Traveler(String firstName, String lastName, String relationship) {
-		setFirstName(firstName);
-		setLastName(lastName);
-		setRelationship(relationship);
-	}	
-	
-	
-	/**
-	 * Constructor that takes id, firstname, and lastname as parameters
-	 * @param id
+	 * Constructor that takes firstname, and lastname as parameters
 	 * @param firstName
 	 * @param lastName
 	 */

@@ -16,11 +16,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 @Data
 @NoArgsConstructor
@@ -56,9 +57,8 @@ public class Vacation {
 	@Column(name="ACTIVITIES")
 	private List<Activity> activities;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@Column(name="TRAVELERS")
-	private List<Traveler> travellers;
+	@Autowired
+	private Traveler traveler;
 
 	/**
 	 * Constructor that takes id, name, destination, startDate, endDate, activities, and travellers as parameters
@@ -71,13 +71,12 @@ public class Vacation {
 	 * @param travellers
 	 */
 	public Vacation(int id, String name, String destination, LocalDate startDate, LocalDate endDate,
-			List<Activity> activities, List<Traveler> travellers) {
+			List<Activity> activities) {
 		setId(id);
 		setDestination(destination);
 		setStartDate(startDate);
 		setEndDate(endDate);
 		setActivities(activities);
-		setTravellers(travellers);
 		setName(name);
 	}
 	
@@ -91,32 +90,14 @@ public class Vacation {
 	 * @param travellers
 	 */
 	public Vacation(String name, String destination, LocalDate startDate, LocalDate endDate,
-			List<Activity> activities, List<Traveler> travellers) {
+			List<Activity> activities) {
 		setDestination(destination);
 		setStartDate(startDate);
 		setEndDate(endDate);
 		setActivities(activities);
-		setTravellers(travellers);
 		setName(name);
 	}
 	
-	/**
-	 * Constructor that takes name, destination, startDate, endDate, and travellers as parameters
-	 * @param name
-	 * @param destination
-	 * @param startDate
-	 * @param endDate
-	 * @param travellers
-	 */
-	public Vacation(String name, String destination, LocalDate startDate, LocalDate endDate,
-			List<Traveler> travellers) {
-		setDestination(destination);
-		setStartDate(startDate);
-		setEndDate(endDate);
-		setActivities(activities);
-		setTravellers(travellers);
-		setName(name);
-	}
 	
 	/**
 	 * Constructor that takes name, destination, startDate, and endDate as parameters
