@@ -14,10 +14,12 @@ import lombok.NoArgsConstructor;
 public class Traveler {
 	
 	@Size(min = 2, max = 50, message = "First Name must be between 1 and 50 characters.")
+	@NotBlank(message = "Please enter a fist name.")
 	@Column(name="FIRSTNAME")
 	private String firstName;
 	
 	@Size(min = 2, max = 50, message = "Last Name must be between 1 and 50 characters.")
+	@NotBlank(message = "Please enter a last name.")
 	@Column(name="LASTNAME")
 	private String lastName;
 	
