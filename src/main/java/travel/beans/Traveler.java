@@ -1,12 +1,7 @@
 package travel.beans;
 
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -18,13 +13,11 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class Traveler {
 	
-	@Size(min = 3, max = 50)
-	@NotBlank
+	@Size(min = 2, max = 50, message = "First Name must be between 1 and 50 characters.")
 	@Column(name="FIRSTNAME")
 	private String firstName;
 	
-	@Size(min = 3, max = 50)
-	@NotBlank
+	@Size(min = 2, max = 50, message = "Last Name must be between 1 and 50 characters.")
 	@Column(name="LASTNAME")
 	private String lastName;
 	
@@ -33,25 +26,24 @@ public class Traveler {
 	
 
 	/**
-	 * Constructor that takes id, firstname, lastname, and relationship as parameters
-	 * @param id
+	 * Constructor that takes first name, last name, and relationship as parameters
 	 * @param firstName
 	 * @param lastName
 	 * @param relationship
 	 */
-	public Traveler(int id, String firstName, String lastName, String relationship) {
+	public Traveler(String firstName, String lastName, String relationship) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setRelationship(relationship);
 	}
 	
 	/**
-	 * Constructor that takes firstname, and lastname as parameters
+	 * Constructor that takes first name, and last name as parameters
 	 * @param firstName
 	 * @param lastName
 	 */
 	public Traveler(String firstName, String lastName) {
 		setFirstName(firstName);
 		setLastName(lastName);
-	}	
+	}
 }
