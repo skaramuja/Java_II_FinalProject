@@ -1,11 +1,7 @@
 package travel.beans;
 
-
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -14,22 +10,16 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name="travelers")
+@Embeddable
 public class Traveler {
-	@Id
-	@GeneratedValue
 	
-	@Column(name="ID")
-	private int id;
-	
-	@Size(min = 3, max = 50)
-	@NotBlank
+	@Size(min = 2, max = 50, message = "First Name must be between 1 and 50 characters.")
+	@NotBlank(message = "Please enter a fist name.")
 	@Column(name="FIRSTNAME")
 	private String firstName;
 	
-	@Size(min = 3, max = 50)
-	@NotBlank
+	@Size(min = 2, max = 50, message = "Last Name must be between 1 and 50 characters.")
+	@NotBlank(message = "Please enter a last name.")
 	@Column(name="LASTNAME")
 	private String lastName;
 	
@@ -38,22 +28,7 @@ public class Traveler {
 	
 
 	/**
-	 * Constructor that takes id, firstname, lastname, and relationship as parameters
-	 * @param id
-	 * @param firstName
-	 * @param lastName
-	 * @param relationship
-	 */
-	public Traveler(int id, String firstName, String lastName, String relationship) {
-		setId(id);
-		setFirstName(firstName);
-		setLastName(lastName);
-		setRelationship(relationship);
-	}
-	
-	/**
-	 * Constructor that takes id, firstname, lastname, and relationship as parameters
-	 * @param id
+	 * Constructor that takes first name, last name, and relationship as parameters
 	 * @param firstName
 	 * @param lastName
 	 * @param relationship
@@ -62,17 +37,15 @@ public class Traveler {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setRelationship(relationship);
-	}	
-	
+	}
 	
 	/**
-	 * Constructor that takes id, firstname, and lastname as parameters
-	 * @param id
+	 * Constructor that takes first name, and last name as parameters
 	 * @param firstName
 	 * @param lastName
 	 */
 	public Traveler(String firstName, String lastName) {
 		setFirstName(firstName);
 		setLastName(lastName);
-	}	
+	}
 }

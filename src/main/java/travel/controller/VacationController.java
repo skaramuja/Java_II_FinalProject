@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import travel.beans.Vacation;
 import travel.repository.VacationRepository;
 
@@ -21,7 +20,7 @@ import travel.repository.VacationRepository;
 public class VacationController {
 	@Autowired
 	VacationRepository repo;
-
+	
 
 	/**
 	 * Displays all vacations
@@ -62,6 +61,7 @@ public class VacationController {
 		repo.save(vacation);
 		return "redirect:/vacations";
 	}
+	
 
 	/**
 	 * Delete a vacation
@@ -83,7 +83,8 @@ public class VacationController {
 	 */
 	@GetMapping("/new")
 	public String newVacation(Model model) {
-		model.addAttribute("newVacation", new Vacation());
+		Vacation vacation = new Vacation();
+		model.addAttribute("newVacation", vacation);
 		return ("planYourTrip");
 	}
 }

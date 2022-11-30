@@ -2,8 +2,6 @@ package travel.controller;
 
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +23,7 @@ public class BeanConfiguration {
 	}
 
 	@Bean
-	public Traveler Traveler() {
+	public Traveler traveler() {
 		Traveler traveler = new Traveler("Tom", "Brady");
 		return traveler;
 	}
