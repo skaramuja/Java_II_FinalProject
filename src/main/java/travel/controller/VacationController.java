@@ -1,5 +1,7 @@
 package travel.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import travel.beans.Activity;
 import travel.beans.Vacation;
+import travel.repository.ActivityRepository;
 import travel.repository.VacationRepository;
 
 @RequestMapping("vacations")
@@ -20,6 +24,9 @@ import travel.repository.VacationRepository;
 public class VacationController {
 	@Autowired
 	VacationRepository repo;
+	
+	@Autowired
+	ActivityRepository activityRepo;
 	
 
 	/**
@@ -49,6 +56,7 @@ public class VacationController {
 	/**
 	 * Save a vacation
 	 * @param vacation
+	 * @param bindingResult
 	 * @param model
 	 * @return myTrips
 	 */
@@ -65,8 +73,7 @@ public class VacationController {
 
 	/**
 	 * Delete a vacation
-	 * @param vacation
-	 * @param model
+	 * @param id
 	 * @return myTrips
 	 */
 	@GetMapping("/delete/{id}")
@@ -74,6 +81,22 @@ public class VacationController {
 		Vacation vacation = repo.findById(id).orElse(null);
 		repo.delete(vacation);
 		return "redirect:/vacations";
+	}
+	
+	/**
+	 * Vacation details
+	 * @param id
+	 * @param model
+	 * @return myTrips
+	 */
+	@GetMapping("/details/{id}")
+	public String viewVacationDetails(@PathVariable("id") int id, Model model) {
+		Vacation vacation = repo.findById(id).orElse(null);
+		model.addAttribute("vacation", vacation);
+		
+		List<Activity> activities = activityRepo.findAll();
+		model.addAttribute("allActivities", activities);
+		return "vacationDetails";
 	}
 	
 	/**

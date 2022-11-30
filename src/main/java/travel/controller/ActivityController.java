@@ -24,13 +24,22 @@ public class ActivityController {
 	@Autowired
 	ActivityRepository repo;
 	
+	/**
+	 * Displays all activities
+	 * @param model
+	 * @return activities
+	 */
 	@GetMapping("")
 	public String viewAllActivities(Model model) {
 		model.addAttribute("activities", repo.findAll());
 		return "myActivities";
 	}
 	
-	
+	/**
+	 * Displays a activities based on its id to edit
+	 * @param model
+	 * @return creatingActivity
+	 */
 	@GetMapping("/{id}")
 	public String viewActivity(@PathVariable("id") int id, Model model) {
 		Activity activity = repo.findById(id).orElse(null);
@@ -38,12 +47,14 @@ public class ActivityController {
 		return ("creatingActivity");
 	}
 	
-	/*@PostMapping("/{id}")
-	public RedirectView saveActivity(@ModelAttribute Activity activity) {
-		repo.save(activity);
-		return new RedirectView("../myActivities");
-	}*/
 	
+	/**
+	 * Save a activity
+	 * @param activity
+	 * @param model
+	 * @param bindingResult
+	 * @return activities
+	 */
 	@PostMapping("/{id}")
 	public String saveActivity(@Valid @ModelAttribute("newActivity") Activity activity, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
@@ -53,18 +64,28 @@ public class ActivityController {
 		repo.save(activity);
 		return "redirect:/myActivities";
 	}
+	
+	
+	/**
+	 * Add a new activity
+	 * @param model
+	 * @return activities
+	 */
 	@GetMapping("/new")
 	public String addNewActivity(Model model) {
 		model.addAttribute("newActivity", new Activity());
 		return "creatingActivity";
 	}
 	
+	/**
+	 * Delete an activity
+	 * @param id
+	 * @return activities
+	 */
 	@GetMapping("/delete/{id}")
 	public String deleteActivity(@PathVariable("id") int id) {
 		Activity activity = repo.findById(id).orElse(null);
 		repo.delete(activity);
 		return "redirect:/myActivities";
 	}
-	
-
 }
