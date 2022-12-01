@@ -23,7 +23,7 @@ import travel.repository.VacationRepository;
 @Controller
 public class VacationController {
 	@Autowired
-	VacationRepository repo;
+	VacationRepository vacationRepo;
 	
 	@Autowired
 	ActivityRepository activityRepo;
@@ -36,7 +36,7 @@ public class VacationController {
 	 */
 	@GetMapping("")
 	public String viewAllVacations(Model model) {
-		model.addAttribute("vacation", repo.findAll());
+		model.addAttribute("vacation", vacationRepo.findAll());
 		return "myTrips";
 	}
 	
@@ -48,7 +48,7 @@ public class VacationController {
 	 */
 	@GetMapping("/{id}")
 	public String viewVacation(@PathVariable("id") int id, Model model) {
-		Vacation vacation = repo.findById(id).orElse(null);
+		Vacation vacation = vacationRepo.findById(id).orElse(null);
 		model.addAttribute("newVacation", vacation);
 		return ("planYourTrip");
 	}
@@ -66,7 +66,7 @@ public class VacationController {
 			model.addAttribute("newVacation", vacation);
 			return "planYourTrip";
 		}
-		repo.save(vacation);
+		vacationRepo.save(vacation);
 		return "redirect:/vacations";
 	}
 	
@@ -78,8 +78,8 @@ public class VacationController {
 	 */
 	@GetMapping("/delete/{id}")
 	public String deleteVacation(@PathVariable("id") int id) {
-		Vacation vacation = repo.findById(id).orElse(null);
-		repo.delete(vacation);
+		Vacation vacation = vacationRepo.findById(id).orElse(null);
+		vacationRepo.delete(vacation);
 		return "redirect:/vacations";
 	}
 	
@@ -87,11 +87,11 @@ public class VacationController {
 	 * Vacation details
 	 * @param id
 	 * @param model
-	 * @return myTrips
+	 * @return vacationDetails
 	 */
 	@GetMapping("/details/{id}")
 	public String viewVacationDetails(@PathVariable("id") int id, Model model) {
-		Vacation vacation = repo.findById(id).orElse(null);
+		Vacation vacation = vacationRepo.findById(id).orElse(null);
 		model.addAttribute("vacation", vacation);
 		
 		List<Activity> activities = activityRepo.findAll();
