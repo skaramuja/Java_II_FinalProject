@@ -27,17 +27,17 @@ public class Activity {
 	@Column(name="ID")
 	private int id;
 	
-	@Size(min = 3, max = 50)
-	@NotBlank
+	@Size(min = 3, max = 50, message = "Activity Name must be between 3 and 50 characters.")
+	@NotBlank(message = "Please enter in activity name.")
 	@Column(name="NAME")
 	private String name;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@NotNull
+	@NotNull(message = "Please enter a date for activity.")
 	@Column(name="DATE")
 	private LocalDate date;
 	
-	@Size(min = 3, max = 100)
+	@Size(min = 3, max = 100, message = "Enter a description of the activity.")
 	@Column(name="DESCRIPTION")
 	private String description;
 	
