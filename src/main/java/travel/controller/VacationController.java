@@ -1,5 +1,7 @@
 package travel.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import travel.beans.Activity;
 import travel.beans.Vacation;
+import travel.repository.ActivityRepository;
 import travel.repository.VacationRepository;
 
 @RequestMapping("vacations")
 @Controller
 public class VacationController {
 	@Autowired
-	VacationRepository repo;
+	VacationRepository vacationRepo;
+	
+	@Autowired
+	ActivityRepository activityRepo;
 	
 
 	/**
@@ -29,7 +36,7 @@ public class VacationController {
 	 */
 	@GetMapping("")
 	public String viewAllVacations(Model model) {
-		model.addAttribute("vacation", repo.findAll());
+		model.addAttribute("vacation", vacationRepo.findAll());
 		return "myTrips";
 	}
 	
@@ -41,7 +48,7 @@ public class VacationController {
 	 */
 	@GetMapping("/{id}")
 	public String viewVacation(@PathVariable("id") int id, Model model) {
-		Vacation vacation = repo.findById(id).orElse(null);
+		Vacation vacation = vacationRepo.findById(id).orElse(null);
 		model.addAttribute("newVacation", vacation);
 		return ("planYourTrip");
 	}
@@ -49,6 +56,7 @@ public class VacationController {
 	/**
 	 * Save a vacation
 	 * @param vacation
+	 * @param bindingResult
 	 * @param model
 	 * @return myTrips
 	 */
@@ -58,22 +66,37 @@ public class VacationController {
 			model.addAttribute("newVacation", vacation);
 			return "planYourTrip";
 		}
-		repo.save(vacation);
+		vacationRepo.save(vacation);
 		return "redirect:/vacations";
 	}
 	
 
 	/**
 	 * Delete a vacation
-	 * @param vacation
-	 * @param model
+	 * @param id
 	 * @return myTrips
 	 */
 	@GetMapping("/delete/{id}")
 	public String deleteVacation(@PathVariable("id") int id) {
-		Vacation vacation = repo.findById(id).orElse(null);
-		repo.delete(vacation);
+		Vacation vacation = vacationRepo.findById(id).orElse(null);
+		vacationRepo.delete(vacation);
 		return "redirect:/vacations";
+	}
+	
+	/**
+	 * Vacation details
+	 * @param id
+	 * @param model
+	 * @return vacationDetails
+	 */
+	@GetMapping("/details/{id}")
+	public String viewVacationDetails(@PathVariable("id") int id, Model model) {
+		Vacation vacation = vacationRepo.findById(id).orElse(null);
+		model.addAttribute("vacation", vacation);
+		
+		List<Activity> activities = activityRepo.findAll();
+		model.addAttribute("allActivities", activities);
+		return "vacationDetails";
 	}
 	
 	/**
