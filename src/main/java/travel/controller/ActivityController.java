@@ -1,5 +1,6 @@
 package travel.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -59,8 +60,20 @@ public class ActivityController {
 		
 		// Don't always add the activity to the database and update. We need to figure out, using the activityID, if the activity already exists in the list. If it does, we need to update it in the list.
 		Vacation vacation = vacationRepo.findById(id).orElse(null);
+
 		List<Activity> activities = vacation.getActivities();
-		activities.add(activity);
+		int indexOfExistingActivity = -1;
+		for(int i = 0; i < activities.size(); i++) {
+			Activity currentActivity = activities.get(i);
+			if(currentActivity.getId() == activity.getId()) {
+				indexOfExistingActivity = i;
+			}
+		}
+		if(indexOfExistingActivity == -1) {
+			activities.add(activity);
+		} else {
+			activities.set(indexOfExistingActivity, activity);
+		}
 		vacation.setActivities(activities);
 		vacationRepo.save(vacation);
 		
@@ -92,9 +105,16 @@ public class ActivityController {
 		
 		// Find the activity in the vacation activities and delete it from the list. 
 		Vacation vacation = vacationRepo.findById(id).orElse(null);
-		List<Activity> activities = vacation.getActivities();
-		activities.add(activity);
-		vacation.setActivities(activities);
+		List<Activity> currentActivities = vacation.getActivities();
+		List<Activity> newActivities = new ArrayList<Activity>(); 
+		for(int i = 0; i < currentActivities.size(); i++) {
+			Activity currentActivity = currentActivities.get(i);
+			if(currentActivity.getId() != activityId) {
+				newActivities.add(currentActivity);
+			}
+		}
+		
+		vacation.setActivities(newActivities);
 		// Save the vacation without the activity
 		vacationRepo.save(vacation);
 		

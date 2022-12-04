@@ -23,7 +23,6 @@
 				  <a class="nav-item nav-link" href="/">Home</a>
 				  <a class="nav-item nav-link" href="/vacations/new">Plan Your Trip</a>
 				  <a class="nav-item nav-link" href="/vacations">My Trips</a>
-				  <a class="nav-item nav-link" href="/myActivities">Activities</a>
 				  <a class="nav-item nav-link" href="destination">Destinations</a>
 				</div>
 			  </div>
@@ -45,6 +44,7 @@
 		<div class="container">
 			<div class="row form">
 				<div class="col-sm">
+					<input type="hidden" name="activityId" th:field="*{id}">
 					<div class="form-group">
 						<label for="name">Activity Name:</label> 
 						<input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Beach, Museum, Picnic, Mini Golf, etc.">
