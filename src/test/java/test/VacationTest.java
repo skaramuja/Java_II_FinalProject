@@ -1,3 +1,4 @@
+
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,6 +30,11 @@ public class VacationTest {
 	List<Activity> activities = new ArrayList<Activity>();
 	
 	Vacation vacation = new Vacation(id, name, destination, startdate, enddate, activities);
+	Vacation vacation2 = new Vacation();
+	Activity activity3 = new Activity("BaseBall", LocalDate.now());
+	Activity activity4 = new Activity("BasketBall", LocalDate.now());
+	List<Activity> activities2 = new ArrayList<Activity>();
+	
 	
 	
 	@BeforeEach
@@ -98,5 +104,47 @@ public class VacationTest {
 		assertNotEquals(LocalDate.of(2022, 12, 10), vacation.getStartDate());
 		assertNotEquals(LocalDate.of(2022, 11, 16), vacation.getEndDate());
 	}
-
+	
+	@Test
+	void testGetterTripsName() {
+		vacation2.setName("Zoo Trip");
+		assertEquals("Zoo Trip", vacation2.getName());
+	}
+	
+	@Test
+	void testGetterTripsID() {
+		vacation2.setId(2);
+		assertEquals(2, vacation2.getId());
+	}
+	
+	@Test
+	void testGetterTripsDestination() {
+		vacation2.setDestination("Omaha Zoo");
+		assertEquals("Omaha Zoo", vacation2.getDestination());
+	}
+	
+	@Test
+	void testGetterTripsStartDate() {
+		LocalDate date2 = LocalDate.now();
+		vacation2.setStartDate(date2);
+		assertEquals(date2, vacation2.getStartDate());
+	}
+	
+	@Test
+	void testGetterTripsEndDate() {
+		LocalDate date2 = LocalDate.of(2022, 12, 7);
+		vacation2.setEndDate(date2);
+		assertEquals(date2, vacation2.getEndDate());
+	}
+	
+	@Test
+	void testGetterTripsActivities() {
+		activities2.add(activity3);
+		activities2.add(activity4);
+		vacation2.setActivities(activities2);
+		assertEquals(activities2, vacation2.getActivities());
+		
+	}
+	
+	
 }
