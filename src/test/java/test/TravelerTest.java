@@ -18,6 +18,7 @@ public class TravelerTest {
 	String relationship = "friend";
 	
 	Traveler traveler = new Traveler(fname, lname, relationship);
+	Traveler traveler2 = new Traveler();
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -50,5 +51,24 @@ public class TravelerTest {
 		assertNotEquals("Bill", traveler.getFirstName());
 		assertNotEquals("Batman", traveler.getLastName());
 	}
+	
+	@Test
+	void testGettingFirstName() {
+		traveler2.setFirstName("Frank");
+		assertEquals("Frank", traveler2.getFirstName());
+	}
+	
+	@Test
+	void testGettingLastName() {
+		traveler2.setLastName("Castle");
+		assertEquals("Castle", traveler2.getLastName());
+	}
+	
+	@Test
+	void testGettingRelationship() {
+		traveler2.setRelationship("Friend");
+		assertEquals("Friend", traveler2.getRelationship());
+	}
+	
 
 }
