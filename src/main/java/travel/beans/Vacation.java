@@ -37,8 +37,8 @@ public class Vacation {
 	@Column(name="NAME")
 	private String name;
 	
-	@Size(min = 2, max = 50)
-	@NotBlank(message = "Please enter a destination.")
+	@Size(min = 2, max = 50, message ="Please enter a destination." )
+	@NotBlank()
 	@Column(name="DESTINATION")
 	private String destination;
 	
