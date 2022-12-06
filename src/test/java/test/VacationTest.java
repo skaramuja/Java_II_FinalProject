@@ -14,11 +14,6 @@ import travel.beans.Activity;
 import travel.beans.Traveler;
 import travel.beans.Vacation;
 
-/**  
-* @author Alex Waters - Awaters6
-* CIS175 - Fall 2021
-* Nov 30, 2022  
-*/
 public class VacationTest {
 	int id = 1;
 	String name = "BirthDay Trip";
