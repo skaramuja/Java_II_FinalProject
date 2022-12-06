@@ -7,11 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import travel.beans.Traveler;
 
-/**  
-* @author Alex Waters - Awaters6
-* CIS175 - Fall 2021
-* Nov 30, 2022  
-*/
 public class TravelerTest {
 	String fname = "Bob";
 	String lname = "Builder";

@@ -33,12 +33,12 @@ public class Vacation {
 	@Column(name="ID")
 	private int id;
 	
-	@Size(min = 1, max = 50, message = "Name must be between 1 and 50 characters.")
+	@Size(max = 50, message = "Name must be less than 50 characters.")
 	@Column(name="NAME")
 	private String name;
 	
-	@Size(min = 2, max = 50, message ="Please enter a destination." )
-	@NotBlank()
+	@Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters.")
+	@NotBlank(message = "Please enter a destination.")
 	@Column(name="DESTINATION")
 	private String destination;
 	

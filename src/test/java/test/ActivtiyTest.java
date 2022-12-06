@@ -1,17 +1,17 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.time.LocalDate;
-import travel.beans.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-/**  
-* @author Alex Waters - Awaters6
-* CIS175 - Fall 2021
-* Nov 30, 2022  
-*/
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+
+import travel.beans.*;
+
+
 public class ActivtiyTest {
 	String name = "Swimming";
 	LocalDate date = LocalDate.now();
