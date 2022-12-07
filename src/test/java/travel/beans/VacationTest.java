@@ -1,5 +1,5 @@
 
-package test;
+package travel.beans;
 
 import static org.junit.jupiter.api.Assertions.*;
 
