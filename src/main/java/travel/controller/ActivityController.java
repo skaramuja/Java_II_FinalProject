@@ -77,7 +77,7 @@ public class ActivityController {
 		vacation.setActivities(activities);
 		vacationRepo.save(vacation);
 		
-		activityRepo.save(activity);
+		//activityRepo.save(activity);
 		return "redirect:/vacations/details/{id}";
 	}
 	
