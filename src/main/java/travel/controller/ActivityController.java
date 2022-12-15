@@ -52,7 +52,7 @@ public class ActivityController {
 	 * @return activities
 	 */
 	@PostMapping("/newActivity")
-	public String saveActivity(@Valid @ModelAttribute("newActivity") Activity activity, @PathVariable("id") int id, BindingResult bindingResult, Model model) {
+	public String saveActivity(@PathVariable("id") int id, @Valid @ModelAttribute("newActivity") Activity activity, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("newActivity", activity);
 			return "creatingActivity";
