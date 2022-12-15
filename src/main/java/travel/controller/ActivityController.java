@@ -55,10 +55,10 @@ public class ActivityController {
 	public String saveActivity(@PathVariable("id") int id, @Valid @ModelAttribute("newActivity") Activity activity, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("newActivity", activity);
+			model.addAttribute("vacationId", id);
 			return "creatingActivity";
 		}
 		
-		// Don't always add the activity to the database and update. We need to figure out, using the activityID, if the activity already exists in the list. If it does, we need to update it in the list.
 		Vacation vacation = vacationRepo.findById(id).orElse(null);
 
 		List<Activity> activities = vacation.getActivities();
@@ -77,7 +77,6 @@ public class ActivityController {
 		vacation.setActivities(activities);
 		vacationRepo.save(vacation);
 		
-		//activityRepo.save(activity);
 		return "redirect:/vacations/details/{id}";
 	}
 	
